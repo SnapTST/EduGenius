@@ -9,6 +9,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { Mail } from 'lucide-react';
+import Link from 'next/link';
 
 export default function ContactPage() {
   const { toast } = useToast();
@@ -32,6 +34,20 @@ export default function ContactPage() {
         description="Have a question or feedback? Fill out the form below to get in touch."
       />
       <div className="max-w-2xl mx-auto">
+        <Card className="mb-8">
+            <CardHeader className="flex flex-row items-center gap-4">
+                <Mail className="w-8 h-8 text-primary" />
+                <div>
+                <CardTitle className="font-headline">Email Us Directly</CardTitle>
+                <CardDescription>For any inquiries, you can email us at:</CardDescription>
+                </div>
+            </CardHeader>
+            <CardContent>
+                <Link href="mailto:officialprashant.org@gmail.com" className="font-medium text-primary hover:underline">
+                officialprashant.org@gmail.com
+                </Link>
+            </CardContent>
+        </Card>
         <Card>
           <CardHeader>
             <CardTitle className="font-headline">Send us a Message</CardTitle>

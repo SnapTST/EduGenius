@@ -27,8 +27,8 @@ export default function SupportPage() {
             <p className="mb-2">
               Send us an email and we'll get back to you within 24 hours.
             </p>
-            <Link href="mailto:support@edugenius.com" className="font-medium text-primary hover:underline">
-              support@edugenius.com
+            <Link href="mailto:officialprashant.org@gmail.com" className="font-medium text-primary hover:underline">
+              officialprashant.org@gmail.com
             </Link>
           </CardContent>
         </Card>
