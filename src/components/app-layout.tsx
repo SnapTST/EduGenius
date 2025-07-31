@@ -1,5 +1,4 @@
 
-
 'use client';
 
 import * as React from 'react';
@@ -32,6 +31,11 @@ const helpNavItems = [
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <SidebarProvider>
@@ -79,7 +83,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
           </SidebarMenu>
 
           <SidebarFooter>
-            <UserNav />
+            {mounted && <UserNav />}
           </SidebarFooter>
         </SidebarContent>
       </Sidebar>
