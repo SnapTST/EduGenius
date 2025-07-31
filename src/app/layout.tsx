@@ -1,4 +1,3 @@
-
 // src/app/layout.tsx
 import './globals.css';
 import { ReactNode } from 'react';
@@ -29,6 +28,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           attribute="class"
           defaultTheme="system"
           enableSystem
+          disableTransitionOnChange
         >
           <ProgressBar />
           {children}
@@ -38,3 +38,4 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </body>
     </html>
   );
+}
