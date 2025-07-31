@@ -5,7 +5,7 @@ import { PageHeader } from '@/components/page-header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, Users } from 'lucide-react';
+import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, Users, Swords } from 'lucide-react';
 import Image from 'next/image';
 
 const features = [
@@ -32,6 +32,14 @@ const features = [
     href: '/daily-practice',
     image: 'https://placehold.co/600x400',
     aiHint: 'quiz test',
+  },
+   {
+    icon: Swords,
+    title: 'MCQ Battle',
+    description: 'Challenge friends in real-time quiz matches.',
+    href: '/mcq-battle',
+    image: 'https://placehold.co/600x400',
+    aiHint: 'two swords clashing',
   },
   {
     icon: BrainCircuit,
@@ -61,7 +69,7 @@ const features = [
     icon: BookOpen,
     title: 'Interactive Notes',
     description: 'Summarize documents and create flashcards.',
-    href: '/smart-notes',
+    href: '/interactive-notes',
     image: 'https://placehold.co/600x400',
     aiHint: 'notebook study',
   },
@@ -112,5 +120,3 @@ export default function DashboardPage() {
     </AppLayout>
   );
 }
-
-    
