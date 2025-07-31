@@ -5,7 +5,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/components/theme-provider';
 import ProgressBar from '@/components/progress-bar';
 import { AuthProvider } from '@/context/auth-context';
-import Script from 'next/script';
+import AdScript from '@/components/ad-script';
 
 export const metadata: Metadata = {
   title: 'EduGenius',
@@ -26,14 +26,9 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=PT+Sans:wght@400;700&display=swap"
           rel="stylesheet"
         />
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1141286894515635"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
       </head>
       <body className={cn('font-body antialiased min-h-screen')}>
+        <AdScript />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
