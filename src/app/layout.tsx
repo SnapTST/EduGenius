@@ -3,6 +3,7 @@ import './globals.css';
 import { cn } from '@/lib/utils';
 import { Toaster } from "@/components/ui/toaster";
 import Script from 'next/script';
+import ProgressBar from '@/components/progress-bar';
 
 export const metadata: Metadata = {
   title: 'EduGenius',
@@ -31,6 +32,7 @@ export default function RootLayout({
         />
       </head>
       <body className={cn('font-body antialiased min-h-screen')}>
+        <ProgressBar />
         {children}
         <Toaster />
       </body>
