@@ -1,22 +1,19 @@
-import type { Metadata } from 'next';
+// src/app/layout.tsx
 import './globals.css';
+import { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
-import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/components/theme-provider';
-import ProgressBar from '@/components/progress-bar';
-import { AuthProvider } from '@/context/auth-context';
 import AdScript from '@/components/ad-script';
+import { AuthProvider } from '@/context/auth-context';
+import { Toaster } from '@/components/ui/toaster';
+import ProgressBar from '@/components/progress-bar';
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'EduGenius',
-  description: 'Your AI-powered study partner',
+  description: 'Your AI-Powered Study Partner',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -28,19 +25,14 @@ export default function RootLayout({
         />
       </head>
       <body className={cn('font-body antialiased min-h-screen')}>
-        <AdScript />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ProgressBar />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <AuthProvider>
-            <ProgressBar />
             {children}
             <Toaster />
           </AuthProvider>
         </ThemeProvider>
+        <AdScript />
       </body>
     </html>
   );
