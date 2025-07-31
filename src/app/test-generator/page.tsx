@@ -25,7 +25,7 @@ const formSchema = z.object({
   documentDataUri: z.string().optional(),
   difficulty: z.enum(['easy', 'medium', 'hard']),
   numberOfQuestions: z.coerce.number().int().min(1).max(20),
-  marksPerQuestion: z.coerce.number().int().min(1).max(10),
+  totalMarks: z.coerce.number().int().min(1).max(100),
 });
 
 export default function TestGeneratorPage() {
@@ -41,7 +41,7 @@ export default function TestGeneratorPage() {
       topics: '',
       difficulty: 'medium',
       numberOfQuestions: 5,
-      marksPerQuestion: 2,
+      totalMarks: 10,
     },
   });
 
@@ -188,12 +188,12 @@ export default function TestGeneratorPage() {
                   />
                   <FormField
                     control={form.control}
-                    name="marksPerQuestion"
+                    name="totalMarks"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Marks per Question</FormLabel>
+                        <FormLabel>Total Marks</FormLabel>
                         <FormControl>
-                          <Input type="number" min="1" max="10" {...field} />
+                          <Input type="number" min="1" max="100" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>

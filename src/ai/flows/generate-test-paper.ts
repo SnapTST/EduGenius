@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -29,13 +30,13 @@ const GenerateTestPaperInputSchema = z.object({
     .min(1)
     .max(50)
     .describe('The number of questions to generate.'),
-  marksPerQuestion: z
+  totalMarks: z
     .number()
     .int()
     .min(1)
-    .max(10)
+    .max(100)
     .optional()
-    .describe('The marks allocated for each question.'),
+    .describe('The total marks for the entire test paper.'),
 });
 export type GenerateTestPaperInput = z.infer<typeof GenerateTestPaperInputSchema>;
 
@@ -62,13 +63,14 @@ const prompt = ai.definePrompt({
   {{/if}}
   Difficulty: {{{difficulty}}}
   Number of Questions: {{{numberOfQuestions}}}
-  Marks per Question: {{{marksPerQuestion}}}
+  Total Marks: {{{totalMarks}}}
 
   The test paper should include a variety of question types, such as multiple choice, short answer, and essay questions.
+  Distribute the total marks among the questions appropriately based on their difficulty and type.
 
   Ensure that the questions are appropriate for the specified difficulty level and cover the specified topics comprehensively.
   Output the test paper in plain text format. Do not include any formatting or special characters.
-  Ensure the number of questions matches the specified number, and that the total marks are equal to marksPerQuestion * numberOfQuestions
+  Ensure the number of questions matches the specified number, and that the sum of marks for all questions equals the total marks specified.
   `,
 });
 
@@ -83,3 +85,4 @@ const generateTestPaperFlow = ai.defineFlow(
     return output!;
   }
 );
+
