@@ -6,9 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, ListOrdered, PenSquare, LifeBuoy, Mail } from 'lucide-react';
-import Image from 'next/image';
 import DisplayAd from '@/components/ads/display-ad';
-import { generateImage } from '@/ai/flows/generate-image';
 
 const features = [
   {
@@ -16,113 +14,77 @@ const features = [
     title: 'AI Tutor',
     description: 'Ask any question and get instant, expert explanations.',
     href: '/ai-tutor',
-    image: 'https://placehold.co/600x400',
-    aiHint: 'robot teaching',
   },
   {
     icon: HelpCircle,
     title: 'Doubt Solver',
     description: 'Snap a picture of a question and get an instant answer.',
     href: '/doubt-solver',
-    image: 'https://placehold.co/600x400',
-    aiHint: 'question mark bubble',
   },
     {
     icon: Target,
     title: 'Daily Practice',
     description: 'Take interactive quizzes to test your knowledge.',
     href: '/daily-practice',
-    image: 'https://placehold.co/600x400',
-    aiHint: 'quiz test',
   },
   {
     icon: BrainCircuit,
     title: 'Project Assistant',
     description: 'Get creative and scientific ideas for your next school project.',
     href: '/project-assistant',
-    image: 'https://placehold.co/600x400',
-    aiHint: 'science project',
   },
   {
     icon: ListOrdered,
     title: 'Homework Helper',
     description: 'Upload homework questions and get step-by-step answers.',
     href: '/homework-helper',
-    image: 'https://placehold.co/600x400',
-    aiHint: 'homework paper steps',
   },
   {
     icon: ScanLine,
     title: 'Textbook Chapter Scanner',
     description: 'Scan textbook chapters using your camera.',
     href: '/chapter-scanner',
-    image: 'https://placehold.co/600x400',
-    aiHint: 'camera scanning',
   },
   {
     icon: FileText,
     title: 'AI Test Generator',
     description: 'Create custom tests by topic, difficulty, and marks.',
     href: '/test-generator',
-    image: 'https://placehold.co/600x400',
-    aiHint: 'education classroom',
   },
   {
     icon: PenSquare,
     title: 'Essay Writer',
     description: 'Generate essays and stories for your assignments.',
     href: '/essay-writer',
-    image: 'https://placehold.co/600x400',
-    aiHint: 'person writing essay',
   },
   {
     icon: BookOpen,
     title: 'Interactive Notes',
     description: 'Summarize documents and create flashcards.',
     href: '/interactive-notes',
-    image: 'https://placehold.co/600x400',
-    aiHint: 'notebook study',
   },
   {
     icon: Layers,
     title: 'Flashcard Creator',
     description: 'Generate flashcards from your notes or chapters.',
     href: '/flashcard-creator',
-    image: 'https://placehold.co/600x400',
-    aiHint: 'stack of cards',
   },
   {
     icon: LifeBuoy,
     title: 'Help & Support',
     description: 'Find answers to your questions and get help.',
     href: '/help',
-    image: 'https://placehold.co/600x400',
-    aiHint: 'help desk support',
   },
   {
     icon: Mail,
     title: 'Contact Us',
     description: 'Get in touch with us for any inquiries.',
     href: '/contact',
-    image: 'https://placehold.co/600x400',
-    aiHint: 'contact email envelope',
   },
 ];
 
 
 export default async function DashboardPage() {
-  const featuresWithImages = [];
-
-  for (const feature of features) {
-    try {
-      const result = await generateImage({ prompt: feature.aiHint });
-      featuresWithImages.push({ ...feature, image: result.imageDataUri });
-    } catch (error) {
-      console.error(`Failed to generate image for "${feature.title}":`, error);
-      featuresWithImages.push({ ...feature, image: 'https://placehold.co/600x400.png' }); // Fallback
-    }
-  }
-
   return (
     <AppLayout>
       <PageHeader
@@ -131,7 +93,7 @@ export default async function DashboardPage() {
       />
       <DisplayAd />
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-        {featuresWithImages.map((feature) => (
+        {features.map((feature) => (
             <Card key={feature.href} className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl">
                 <CardHeader className="flex flex-row items-center gap-4 pb-4">
                     <div className="p-3 rounded-md bg-primary/10 text-primary">
@@ -142,10 +104,7 @@ export default async function DashboardPage() {
                         <CardDescription>{feature.description}</CardDescription>
                     </div>
                 </CardHeader>
-                <CardContent className="flex-grow flex flex-col justify-between">
-                    <div className="relative aspect-video w-full mb-4">
-                        <Image src={feature.image} alt={feature.title} layout="fill" objectFit="cover" className="rounded-md" data-ai-hint={feature.aiHint} />
-                    </div>
+                <CardContent className="flex-grow flex flex-col justify-end">
                     <Button asChild className="w-full mt-auto">
                         <Link href={feature.href}>
                             Get Started <ArrowRight className="ml-2 h-4 w-4" />
