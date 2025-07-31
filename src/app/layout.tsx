@@ -23,7 +23,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=PT+Sans:wght@400;700&display=swap"
           rel="stylesheet"
         />
-        <AdScript />
       </head>
       <body className={cn('font-body antialiased min-h-screen')}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
@@ -31,6 +30,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             {children}
             <Toaster />
         </ThemeProvider>
+        <AdScript />
       </body>
     </html>
   );
