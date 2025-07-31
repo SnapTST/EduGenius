@@ -73,6 +73,14 @@ const features = [
     image: 'https://placehold.co/600x400',
     aiHint: 'notebook study',
   },
+  {
+    icon: Layers,
+    title: 'Flashcard Creator',
+    description: 'Generate flashcards from your notes or chapters.',
+    href: '/flashcard-creator',
+    image: 'https://placehold.co/600x400',
+    aiHint: 'stack of cards',
+  },
    {
     icon: Video,
     title: 'Video Library',

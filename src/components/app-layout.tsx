@@ -20,6 +20,7 @@ const navItems = [
   { href: '/chapter-scanner', icon: ScanLine, label: 'Chapter Scanner' },
   { href: '/test-generator', icon: FileText, label: 'AI Test Generator' },
   { href: '/interactive-notes', icon: BookOpen, label: 'Interactive Notes' },
+  { href: '/flashcard-creator', icon: Layers, label: 'Flashcard Creator' },
   { href: '/video-library', icon: Video, label: 'Video Library' },
   { href: '/community-forum', icon: Users, label: 'Community Forum'},
 ];
