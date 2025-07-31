@@ -4,10 +4,18 @@ import { PageHeader } from '@/components/page-header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { FileText, BookOpen, FileSearch, ArrowRight, Layers } from 'lucide-react';
+import { FileText, BookOpen, FileSearch, ArrowRight, Layers, ScanLine } from 'lucide-react';
 import Image from 'next/image';
 
 const features = [
+  {
+    icon: ScanLine,
+    title: 'Textbook Chapter Scanner',
+    description: 'Scan textbook chapters using your camera.',
+    href: '/chapter-scanner',
+    image: 'https://placehold.co/600x400',
+    aiHint: 'camera scanning',
+  },
   {
     icon: FileText,
     title: 'AI Test Generator',
@@ -51,7 +59,7 @@ export default function DashboardPage() {
         description="Ready to ace your exams? Let's get started."
       />
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
         {features.map((feature) => (
             <Card key={feature.href} className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl">
                 <CardHeader className="flex flex-row items-center gap-4 pb-4">
