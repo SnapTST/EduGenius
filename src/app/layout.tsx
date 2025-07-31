@@ -1,8 +1,7 @@
-
 import type { Metadata } from 'next';
 import './globals.css';
 import { cn } from '@/lib/utils';
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from '@/components/ui/toaster';
 import Script from 'next/script';
 import { ThemeProvider } from '@/components/theme-provider';
 import ProgressBar from '@/components/progress-bar';
