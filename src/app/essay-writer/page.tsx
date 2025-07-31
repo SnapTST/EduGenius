@@ -111,7 +111,7 @@ export default function EssayWriterPage() {
                           <FormControl>
                             <SelectTrigger>
                               <SelectValue placeholder="Select type" />
-                            </SelectTrigger>
+                            </Trigger>
                           </FormControl>
                           <SelectContent>
                             <SelectItem value="expository">Expository</SelectItem>
