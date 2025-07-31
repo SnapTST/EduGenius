@@ -6,7 +6,6 @@ import { Toaster } from "@/components/ui/toaster";
 import Script from 'next/script';
 import { ThemeProvider } from '@/components/theme-provider';
 import ProgressBar from '@/components/progress-bar';
-import { AuthProvider } from '@/context/auth-context';
 
 export const metadata: Metadata = {
   title: 'EduGenius',
@@ -34,20 +33,18 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
       </head>
-      <body className={cn('font-body antialiased min-h-screen')}>
-        <AuthProvider>
-            <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-                disableTransitionOnChange
-            >
-                <ProgressBar />
-                {children}
-                <Toaster />
-            </ThemeProvider>
-        </AuthProvider>
-      </body>
+      <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+      >
+        <body className={cn('font-body antialiased min-h-screen')}>
+            <ProgressBar />
+            {children}
+            <Toaster />
+        </body>
+      </ThemeProvider>
     </html>
   );
 }

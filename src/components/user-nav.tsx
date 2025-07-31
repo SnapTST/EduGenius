@@ -13,15 +13,16 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { LogOut, User, Moon, Sun } from 'lucide-react';
-import { useAuth } from '@/context/auth-context';
 import { useTheme } from 'next-themes';
+import Link from 'next/link';
 
 export function UserNav() {
-  const { user, signOut } = useAuth();
   const { setTheme, theme } = useTheme();
 
-  if (!user) {
-    return null;
+  const user = {
+      displayName: 'Guest User',
+      email: 'guest@example.com',
+      photoURL: 'https://placehold.co/40x40.png'
   }
 
   return (
@@ -59,9 +60,11 @@ export function UserNav() {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={signOut}>
-          <LogOut className="mr-2 h-4 w-4" />
-          <span>Log out</span>
+        <DropdownMenuItem>
+            <Link href="/" className="flex items-center w-full">
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Log out</span>
+            </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
