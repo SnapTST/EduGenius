@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { SidebarProvider, Sidebar, SidebarTrigger, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarHeader, SidebarFooter, SidebarRail } from '@/components/ui/sidebar';
 import { Logo } from '@/components/logo';
 import { UserNav } from '@/components/user-nav';
-import { LayoutDashboard, FileText, BookOpen, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, ListOrdered, PenSquare } from 'lucide-react';
+import { LayoutDashboard, FileText, BookOpen, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, ListOrdered, PenSquare, LifeBuoy, Mail } from 'lucide-react';
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
@@ -22,6 +22,12 @@ const navItems = [
   { href: '/essay-writer', icon: PenSquare, label: 'Essay Writer' },
   { href: '/interactive-notes', icon: BookOpen, label: 'Interactive Notes' },
   { href: '/flashcard-creator', icon: Layers, label: 'Flashcard Creator' },
+];
+
+const helpNavItems = [
+    { href: '/help', icon: LifeBuoy, label: 'Help Center' },
+    { href: '/support', icon: LifeBuoy, label: 'Support' },
+    { href: '/contact', icon: Mail, label: 'Contact Us' },
 ];
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
@@ -38,7 +44,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
               <h1 className="text-xl font-headline font-semibold">EduGenius</h1>
             </div>
           </SidebarHeader>
-          <SidebarMenu>
+          <SidebarMenu className="flex-1">
             {navItems.map((item) => (
               <SidebarMenuItem key={item.href}>
                 <SidebarMenuButton
@@ -54,6 +60,24 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
               </SidebarMenuItem>
             ))}
           </SidebarMenu>
+          
+          <SidebarMenu>
+            {helpNavItems.map((item) => (
+              <SidebarMenuItem key={item.href}>
+                <SidebarMenuButton
+                  asChild
+                  isActive={pathname === item.href}
+                  tooltip={item.label}
+                >
+                  <Link href={item.href}>
+                    <item.icon />
+                    <span>{item.label}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+
           <SidebarFooter>
             <UserNav />
           </SidebarFooter>

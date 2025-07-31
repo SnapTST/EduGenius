@@ -5,7 +5,7 @@ import { PageHeader } from '@/components/page-header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, ListOrdered, PenSquare } from 'lucide-react';
+import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, ListOrdered, PenSquare, LifeBuoy, Mail } from 'lucide-react';
 import Image from 'next/image';
 
 const features = [
@@ -88,6 +88,22 @@ const features = [
     href: '/flashcard-creator',
     image: 'https://placehold.co/600x400',
     aiHint: 'stack of cards',
+  },
+  {
+    icon: LifeBuoy,
+    title: 'Help & Support',
+    description: 'Find answers to your questions and get help.',
+    href: '/help',
+    image: 'https://placehold.co/600x400',
+    aiHint: 'help desk support',
+  },
+  {
+    icon: Mail,
+    title: 'Contact Us',
+    description: 'Get in touch with us for any inquiries.',
+    href: '/contact',
+    image: 'https://placehold.co/600x400',
+    aiHint: 'contact email envelope',
   },
 ];
 
