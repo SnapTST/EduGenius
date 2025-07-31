@@ -1,41 +1,127 @@
+
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Moon, Sun } from 'lucide-react';
-import { useTheme } from 'next-themes';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Logo } from '@/components/logo';
+import { useToast } from '@/hooks/use-toast';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { useState } from 'react';
+import { Loader } from '@/components/loader';
 
-export function UserNav() {
-  const { setTheme, theme } = useTheme();
+const formSchema = z.object({
+    name: z.string().min(1, 'Please enter your name.'),
+    email: z.string().email('Please enter a valid email address.'),
+    password: z.string().min(6, 'Password must be at least 6 characters.'),
+});
+
+export default function SignupPage() {
+  const { toast } = useToast();
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+    },
+  });
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
+    // In a real app, you would handle user registration here (e.g., call an API)
+    console.log(values); 
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    toast({
+      title: 'Account Created!',
+      description: "Welcome! You can now log in with your credentials.",
+    });
+    router.push('/login');
+    setIsLoading(false);
+  }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-         <Button variant="ghost" size="icon">
-            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            <span className="sr-only">Toggle theme</span>
-          </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end" forceMount>
-           <DropdownMenuItem onClick={() => setTheme('light')}>
-                <Sun className="mr-2 h-4 w-4" />
-                <span>Light</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme('dark')}>
-                <Moon className="mr-2 h-4 w-4" />
-                <span>Dark</span>
-            </DropdownMenuItem>
-             <DropdownMenuItem onClick={() => setTheme('system')}>
-                <Sun className="mr-2 h-4 w-4" />
-                <span>System</span>
-            </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <main className="flex min-h-screen flex-col items-center justify-center bg-background p-4">
+      <div className="w-full max-w-md">
+        <Card className="shadow-2xl">
+          <CardHeader className="text-center">
+             <Link href="/" className="mx-auto mb-4">
+                <Logo />
+            </Link>
+            <CardTitle className="font-headline text-3xl font-bold tracking-tight">
+              Create an Account
+            </CardTitle>
+            <CardDescription className="pt-2">
+              Start your journey with EduGenius today.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Full Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter your full name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                 <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email Address</FormLabel>
+                      <FormControl>
+                        <Input type="email" placeholder="you@example.com" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input type="password" placeholder="••••••••" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                    {isLoading ? <Loader className="w-6 h-6"/> : 'Create Account'}
+                </Button>
+              </form>
+            </Form>
+            <p className="mt-6 text-center text-sm text-muted-foreground">
+              Already have an account?{' '}
+              <Link href="/login" className="font-medium text-primary hover:underline">
+                Log in
+              </Link>
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    </main>
   );
 }

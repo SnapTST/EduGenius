@@ -1,20 +1,18 @@
-// app/layout.tsx
+
 import './globals.css';
 import { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/components/theme-provider';
-import { Toaster } from '@/components/ui/toaster';
 import AdScript from '@/components/ad-script';
+import { Toaster } from '@/components/ui/toaster';
 import ProgressBar from '@/components/progress-bar';
-import Head from 'next/head';
 
 export const metadata = {
   title: 'EduGenius',
   description: 'Your AI-Powered Study Partner',
 };
 
-// ✅ FIXED: Moved <html> and <body> to return type `JSX.Element` instead of being raw HTML.
-export default function RootLayout({ children }: { children: ReactNode }): JSX.Element {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>

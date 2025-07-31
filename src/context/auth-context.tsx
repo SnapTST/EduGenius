@@ -1,41 +1,53 @@
+
 'use client';
 
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Moon, Sun } from 'lucide-react';
-import { useTheme } from 'next-themes';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-export function UserNav() {
-  const { setTheme, theme } = useTheme();
+// This is a simplified auth context. In a real app, you'd integrate with Firebase Auth
+// or another identity provider.
+
+type AuthContextType = {
+  isAuthenticated: boolean;
+  login: (email: string, pass: string) => boolean;
+  logout: () => void;
+};
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+// A mock user database
+const users = {
+  'user@example.com': 'password123',
+};
+
+export function AuthProvider({ children }: { children: ReactNode }) {
+  // For simplicity, we're not persisting auth state. A real app would use
+  // localStorage, cookies, or a server-side session.
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const login = (email: string, pass: string) => {
+    // @ts-ignore
+    if (users[email] && users[email] === pass) {
+      setIsAuthenticated(true);
+      return true;
+    }
+    return false;
+  };
+
+  const logout = () => {
+    setIsAuthenticated(false);
+  };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-         <Button variant="ghost" size="icon">
-            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            <span className="sr-only">Toggle theme</span>
-          </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end" forceMount>
-           <DropdownMenuItem onClick={() => setTheme('light')}>
-                <Sun className="mr-2 h-4 w-4" />
-                <span>Light</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme('dark')}>
-                <Moon className="mr-2 h-4 w-4" />
-                <span>Dark</span>
-            </DropdownMenuItem>
-             <DropdownMenuItem onClick={() => setTheme('system')}>
-                <Sun className="mr-2 h-4 w-4" />
-                <span>System</span>
-            </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+      {children}
+    </AuthContext.Provider>
   );
+}
+
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
 }
