@@ -26,6 +26,7 @@ const formSchema = z.object({
   difficulty: z.enum(['easy', 'medium', 'hard']),
   numberOfQuestions: z.coerce.number().int().min(1).max(20),
   totalMarks: z.coerce.number().int().min(1).max(100),
+  language: z.string().min(2, 'Please select a language.'),
 });
 
 export default function TestGeneratorPage() {
@@ -42,6 +43,7 @@ export default function TestGeneratorPage() {
       difficulty: 'medium',
       numberOfQuestions: 5,
       totalMarks: 10,
+      language: 'English',
     },
   });
 
@@ -53,10 +55,8 @@ export default function TestGeneratorPage() {
       reader.onload = (loadEvent) => {
         const dataUri = loadEvent.target?.result as string;
         form.setValue('documentDataUri', dataUri);
-        // Maybe clear topics field if a file is uploaded? Or combine them in the prompt.
-        // For now, let's assume the prompt handles it.
         if(!form.getValues('topics')) {
-          form.setValue('topics', file.name); // Use filename as topics if empty
+          form.setValue('topics', file.name); 
         }
       };
       reader.readAsDataURL(file);
@@ -150,7 +150,7 @@ export default function TestGeneratorPage() {
                   )}
                 />
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="difficulty"
@@ -173,6 +173,32 @@ export default function TestGeneratorPage() {
                       </FormItem>
                     )}
                   />
+                   <FormField
+                    control={form.control}
+                    name="language"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Language</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select language" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="English">English</SelectItem>
+                            <SelectItem value="Spanish">Spanish</SelectItem>
+                            <SelectItem value="French">French</SelectItem>
+                            <SelectItem value="German">German</SelectItem>
+                            <SelectItem value="Hindi">Hindi</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="numberOfQuestions"

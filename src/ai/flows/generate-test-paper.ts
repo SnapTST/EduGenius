@@ -37,6 +37,7 @@ const GenerateTestPaperInputSchema = z.object({
     .max(100)
     .optional()
     .describe('The total marks for the entire test paper.'),
+  language: z.string().describe('The language in which to generate the test paper.'),
 });
 export type GenerateTestPaperInput = z.infer<typeof GenerateTestPaperInputSchema>;
 
@@ -55,7 +56,9 @@ const prompt = ai.definePrompt({
   output: {schema: GenerateTestPaperOutputSchema},
   prompt: `You are an expert educator, skilled in creating test papers for students.
 
-  Generate a test paper based on the following criteria. If a document is provided, use it as the primary source of content for the questions. The topics list can provide additional context.
+  Generate a test paper in the specified language: {{{language}}}.
+
+  The test paper should be based on the following criteria. If a document is provided, use it as the primary source of content for the questions. The topics list can provide additional context.
 
   Topics: {{{topics}}}
   {{#if documentDataUri}}
@@ -85,4 +88,3 @@ const generateTestPaperFlow = ai.defineFlow(
     return output!;
   }
 );
-
