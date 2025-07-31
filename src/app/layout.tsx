@@ -6,6 +6,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import AdScript from '@/components/ad-script';
 import { Toaster } from '@/components/ui/toaster';
 import ProgressBar from '@/components/progress-bar';
+import { AuthProvider } from '@/context/auth-context';
 
 export const metadata = {
   title: 'EduGenius',
@@ -30,10 +31,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           enableSystem
           disableTransitionOnChange
         >
-          <ProgressBar />
-          {children}
-          <Toaster />
-          <AdScript />
+          <AuthProvider>
+            <ProgressBar />
+            {children}
+            <Toaster />
+            <AdScript />
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
