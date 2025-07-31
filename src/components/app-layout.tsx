@@ -7,11 +7,12 @@ import Link from 'next/link';
 import { SidebarProvider, Sidebar, SidebarTrigger, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarHeader, SidebarFooter, SidebarRail } from '@/components/ui/sidebar';
 import { Logo } from '@/components/logo';
 import { UserNav } from '@/components/user-nav';
-import { LayoutDashboard, FileText, BookOpen, FileSearch, Layers, ScanLine, BrainCircuit, Bot } from 'lucide-react';
+import { LayoutDashboard, FileText, BookOpen, FileSearch, Layers, ScanLine, BrainCircuit, Bot, HelpCircle } from 'lucide-react';
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
   { href: '/ai-tutor', icon: Bot, label: 'AI Tutor' },
+  { href: '/doubt-solver', icon: HelpCircle, label: 'Doubt Solver' },
   { href: '/project-assistant', icon: BrainCircuit, label: 'Project Assistant' },
   { href: '/chapter-scanner', icon: ScanLine, label: 'Chapter Scanner' },
   { href: '/test-generator', icon: FileText, label: 'AI Test Generator' },

@@ -4,7 +4,7 @@ import { PageHeader } from '@/components/page-header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { FileText, BookOpen, FileSearch, ArrowRight, Layers, ScanLine, BrainCircuit, Bot } from 'lucide-react';
+import { FileText, BookOpen, FileSearch, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle } from 'lucide-react';
 import Image from 'next/image';
 
 const features = [
@@ -15,6 +15,14 @@ const features = [
     href: '/ai-tutor',
     image: 'https://placehold.co/600x400',
     aiHint: 'robot teaching',
+  },
+  {
+    icon: HelpCircle,
+    title: 'Doubt Solver',
+    description: 'Snap a picture of a question and get an instant answer.',
+    href: '/doubt-solver',
+    image: 'https://placehold.co/600x400',
+    aiHint: 'question mark bubble',
   },
   {
     icon: BrainCircuit,
