@@ -63,7 +63,7 @@ export default function EssayWriterPage() {
       setIsLoading(false);
     }
   }
-  
+
   const handleCopyToClipboard = () => {
     if (generatedContent) {
       navigator.clipboard.writeText(generatedContent);
@@ -72,7 +72,6 @@ export default function EssayWriterPage() {
       setTimeout(() => setIsCopied(false), 2000);
     }
   };
-
 
   return (
     <AppLayout>
