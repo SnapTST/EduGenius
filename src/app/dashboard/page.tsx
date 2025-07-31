@@ -111,18 +111,17 @@ const features = [
 
 
 export default async function DashboardPage() {
+  const featuresWithImages = [];
 
-  const imagePromises = features.map(feature => 
-    generateImage({ prompt: feature.aiHint })
-      .then(result => ({ ...feature, image: result.imageDataUri }))
-      .catch(error => {
-        console.error(`Failed to generate image for "${feature.title}":`, error);
-        return { ...feature, image: 'https://placehold.co/600x400.png' }; // Fallback
-      })
-  );
-
-  const featuresWithImages = await Promise.all(imagePromises);
-
+  for (const feature of features) {
+    try {
+      const result = await generateImage({ prompt: feature.aiHint });
+      featuresWithImages.push({ ...feature, image: result.imageDataUri });
+    } catch (error) {
+      console.error(`Failed to generate image for "${feature.title}":`, error);
+      featuresWithImages.push({ ...feature, image: 'https://placehold.co/600x400.png' }); // Fallback
+    }
+  }
 
   return (
     <AppLayout>
