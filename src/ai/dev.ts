@@ -12,3 +12,4 @@ import '@/ai/flows/generate-quiz.ts';
 import '@/ai/flows/homework-helper.ts';
 import '@/ai/flows/essay-writer.ts';
 import '@/ai/flows/generate-image.ts';
+import '@/ai/flows/send-contact-email.ts';

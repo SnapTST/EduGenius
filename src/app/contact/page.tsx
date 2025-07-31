@@ -11,20 +11,56 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Mail } from 'lucide-react';
 import Link from 'next/link';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import * as React from 'react';
+import { sendContactEmail } from '@/ai/flows/send-contact-email';
+import { Loader } from '@/components/loader';
+
+
+const formSchema = z.object({
+  name: z.string().min(1, 'Please enter your name.'),
+  email: z.string().email('Please enter a valid email address.'),
+  subject: z.string().min(1, 'Please enter a subject.'),
+  message: z.string().min(1, 'Please enter a message.'),
+});
+
 
 export default function ContactPage() {
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    // In a real application, you would handle form submission here (e.g., send an email).
-    // For this demo, we'll just show a success message.
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for contacting us. We'll get back to you shortly.",
-    });
-    // @ts-ignore
-    event.target.reset();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      subject: '',
+      message: '',
+    },
+  });
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
+    try {
+      await sendContactEmail(values);
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for contacting us. We'll get back to you shortly.",
+      });
+      form.reset();
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      toast({
+        variant: 'destructive',
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem sending your message. Please try again later.",
+      });
+    } finally {
+        setIsLoading(false);
+    }
   };
 
   return (
@@ -53,27 +89,66 @@ export default function ContactPage() {
             <CardTitle className="font-headline">Send us a Message</CardTitle>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
-                <Input id="name" placeholder="Enter your full name" required />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email Address</Label>
-                <Input id="email" type="email" placeholder="Enter your email address" required />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="subject">Subject</Label>
-                <Input id="subject" placeholder="What is your message about?" required />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="message">Message</Label>
-                <Textarea id="message" placeholder="Type your message here." required rows={6} />
-              </div>
-              <Button type="submit" className="w-full">
-                Send Message
+            <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Label>Full Name</Label>
+                      <FormControl>
+                        <Input placeholder="Enter your full name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                 <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Label>Email Address</Label>
+                      <FormControl>
+                        <Input type="email" placeholder="Enter your email address" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                 <FormField
+                  control={form.control}
+                  name="subject"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Label>Subject</Label>
+                      <FormControl>
+                        <Input placeholder="What is your message about?" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                 <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Label>Message</Label>
+                      <FormControl>
+                        <Textarea placeholder="Type your message here." rows={6} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? <Loader className="w-6 h-6"/> : 'Send Message'}
               </Button>
             </form>
+            </Form>
           </CardContent>
         </Card>
       </div>
