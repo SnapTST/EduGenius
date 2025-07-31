@@ -5,7 +5,7 @@ import { PageHeader } from '@/components/page-header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, Users, Swords, Video, ListOrdered, PenSquare } from 'lucide-react';
+import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, Users, Swords, Video, ListOrdered, PenSquare, Newspaper } from 'lucide-react';
 import Image from 'next/image';
 
 const features = [
@@ -112,6 +112,14 @@ const features = [
     href: '/community-forum',
     image: 'https://placehold.co/600x400',
     aiHint: 'people talking forum',
+  },
+  {
+    icon: Newspaper,
+    title: 'News & Updates',
+    description: 'Latest educational news, exams, and scholarships.',
+    href: '/news-and-updates',
+    image: 'https://placehold.co/600x400',
+    aiHint: 'newspaper article',
   },
 ];
 

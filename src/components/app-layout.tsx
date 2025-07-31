@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { SidebarProvider, Sidebar, SidebarTrigger, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarHeader, SidebarFooter, SidebarRail } from '@/components/ui/sidebar';
 import { Logo } from '@/components/logo';
 import { UserNav } from '@/components/user-nav';
-import { LayoutDashboard, FileText, BookOpen, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, Users, Swords, Video, ListOrdered, PenSquare } from 'lucide-react';
+import { LayoutDashboard, FileText, BookOpen, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, Users, Swords, Video, ListOrdered, PenSquare, Newspaper } from 'lucide-react';
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
@@ -25,6 +25,7 @@ const navItems = [
   { href: '/flashcard-creator', icon: Layers, label: 'Flashcard Creator' },
   { href: '/video-library', icon: Video, label: 'Video Library' },
   { href: '/community-forum', icon: Users, label: 'Community Forum'},
+  { href: '/news-and-updates', icon: Newspaper, label: 'News & Updates'},
 ];
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
