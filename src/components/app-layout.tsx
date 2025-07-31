@@ -1,26 +1,28 @@
 'use client';
 
 import React from 'react';
-import { UserNav } from '@/components/user-nav'; // or remove if not needed
+import { UserNav } from '@/components/user-nav'; // Optional: Remove if not using
+import { cn } from '@/lib/utils'; // Optional: Only if you're using `cn()` utility
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen flex flex-col bg-white text-black dark:bg-gray-900 dark:text-white">
-      {/* Top navigation (optional) */}
-      <header className="w-full px-4 py-3 shadow bg-gray-100 dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
+      {/* Header */}
+      <header className="w-full px-6 py-4 border-b border-border bg-white dark:bg-zinc-900">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
           <h1 className="text-xl font-bold">EduGenius</h1>
-          <UserNav /> {/* You can remove this if UserNav is not available */}
+          {/* User Navigation */}
+          <UserNav /> {/* Optional – remove if you're not using UserNav */}
         </div>
       </header>
 
-      {/* Main content */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-6">
+      {/* Main Content */}
+      <main className="flex-1 w-full px-6 py-8 max-w-7xl mx-auto">
         {children}
       </main>
 
-      {/* Footer (optional) */}
-      <footer className="w-full py-4 text-center text-sm text-gray-500 dark:text-gray-400">
+      {/* Footer */}
+      <footer className="w-full px-6 py-4 border-t border-border text-center text-sm text-muted-foreground">
         © {new Date().getFullYear()} EduGenius. All rights reserved.
       </footer>
     </div>
