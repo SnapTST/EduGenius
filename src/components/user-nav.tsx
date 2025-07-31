@@ -13,7 +13,7 @@ import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 export function UserNav() {
-  const { setTheme, theme } = useTheme();
+  const { setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
@@ -21,10 +21,7 @@ export function UserNav() {
   }, []);
 
   if (!mounted) {
-    // Render a placeholder or nothing on the server to avoid hydration mismatch
-    return (
-      <div className="h-10 w-10" />
-    );
+    return <div className="h-10 w-10" />;
   }
 
   return (
