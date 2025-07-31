@@ -69,88 +69,92 @@ export default function ContactPage() {
         title="Contact Us"
         description="Have a question or feedback? Fill out the form below to get in touch."
       />
-      <div className="max-w-2xl mx-auto">
-        <Card className="mb-8">
-            <CardHeader className="flex flex-row items-center gap-4">
-                <Mail className="w-8 h-8 text-primary" />
-                <div>
-                <CardTitle className="font-headline">Email Us Directly</CardTitle>
-                <CardDescription>For any inquiries, you can email us at:</CardDescription>
-                </div>
-            </CardHeader>
-            <CardContent>
-                <Link href="mailto:officialprashant.org@gmail.com" className="font-medium text-primary hover:underline">
-                officialprashant.org@gmail.com
-                </Link>
-            </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle className="font-headline">Send us a Message</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <Label>Full Name</Label>
-                      <FormControl>
-                        <Input placeholder="Enter your full name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                 <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <Label>Email Address</Label>
-                      <FormControl>
-                        <Input type="email" placeholder="Enter your email address" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                 <FormField
-                  control={form.control}
-                  name="subject"
-                  render={({ field }) => (
-                    <FormItem>
-                      <Label>Subject</Label>
-                      <FormControl>
-                        <Input placeholder="What is your message about?" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                 <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <Label>Message</Label>
-                      <FormControl>
-                        <Textarea placeholder="Type your message here." rows={6} {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="lg:col-span-1 space-y-8">
+            <Card>
+                <CardHeader className="flex flex-row items-center gap-4">
+                    <Mail className="w-8 h-8 text-primary" />
+                    <div>
+                    <CardTitle className="font-headline">Email Us Directly</CardTitle>
+                    <CardDescription>For any inquiries, email us at:</CardDescription>
+                    </div>
+                </CardHeader>
+                <CardContent>
+                    <Link href="mailto:officialprashant.org@gmail.com" className="font-medium text-primary hover:underline break-all">
+                    officialprashant.org@gmail.com
+                    </Link>
+                </CardContent>
+            </Card>
+        </div>
+        <div className="lg:col-span-2">
+            <Card>
+              <CardHeader>
+                <CardTitle className="font-headline">Send us a Message</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <Label>Full Name</Label>
+                          <FormControl>
+                            <Input placeholder="Enter your full name" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                     <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <Label>Email Address</Label>
+                          <FormControl>
+                            <Input type="email" placeholder="Enter your email address" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                     <FormField
+                      control={form.control}
+                      name="subject"
+                      render={({ field }) => (
+                        <FormItem>
+                          <Label>Subject</Label>
+                          <FormControl>
+                            <Input placeholder="What is your message about?" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                     <FormField
+                      control={form.control}
+                      name="message"
+                      render={({ field }) => (
+                        <FormItem>
+                          <Label>Message</Label>
+                          <FormControl>
+                            <Textarea placeholder="Type your message here." rows={6} {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
-              <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? <Loader className="w-6 h-6"/> : 'Send Message'}
-              </Button>
-            </form>
-            </Form>
-          </CardContent>
-        </Card>
+                  <Button type="submit" className="w-full" disabled={isLoading}>
+                    {isLoading ? <Loader className="w-6 h-6"/> : 'Send Message'}
+                  </Button>
+                </form>
+                </Form>
+              </CardContent>
+            </Card>
+        </div>
       </div>
     </AppLayout>
   );
