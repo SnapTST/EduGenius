@@ -83,16 +83,19 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
           </SidebarFooter>
         </SidebarContent>
       </Sidebar>
-      <main className="flex-1">
+      <main className="flex-1 flex flex-col">
         <header className="flex h-14 items-center gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6 sticky top-0 z-30">
             <SidebarTrigger className="md:hidden"/>
             <div className="flex-1">
                 {/* We can add a page title here if needed */}
             </div>
         </header>
-        <div className="p-4 sm:p-6 md:p-8">
+        <div className="p-4 sm:p-6 md:p-8 flex-grow">
             {children}
         </div>
+        <footer className="p-4 text-center text-sm text-muted-foreground border-t">
+            © {new Date().getFullYear()} Prashant Pandey. All rights reserved.
+        </footer>
       </main>
     </SidebarProvider>
   );
