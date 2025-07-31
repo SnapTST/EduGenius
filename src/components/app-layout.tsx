@@ -52,7 +52,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                   isActive={pathname === item.href}
                   tooltip={item.label}
                 >
-                  <Link href={item.href}>
+                  <Link href={item.href} prefetch={true}>
                     <item.icon />
                     <span>{item.label}</span>
                   </Link>
@@ -69,7 +69,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                   isActive={pathname === item.href}
                   tooltip={item.label}
                 >
-                  <Link href={item.href}>
+                  <Link href={item.href} prefetch={true}>
                     <item.icon />
                     <span>{item.label}</span>
                   </Link>
