@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { SidebarProvider, Sidebar, SidebarTrigger, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarHeader, SidebarFooter, SidebarRail } from '@/components/ui/sidebar';
 import { Logo } from '@/components/logo';
 import { UserNav } from '@/components/user-nav';
-import { LayoutDashboard, FileText, BookOpen, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target } from 'lucide-react';
+import { LayoutDashboard, FileText, BookOpen, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, Users } from 'lucide-react';
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
@@ -19,6 +19,7 @@ const navItems = [
   { href: '/chapter-scanner', icon: ScanLine, label: 'Chapter Scanner' },
   { href: '/test-generator', icon: FileText, label: 'AI Test Generator' },
   { href: '/smart-notes', icon: BookOpen, label: 'Interactive Notes' },
+  { href: '/community-forum', icon: Users, label: 'Community Forum'},
 ];
 
 export function AppLayout({ children }: { children: React.ReactNode }) {

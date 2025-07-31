@@ -5,7 +5,7 @@ import { PageHeader } from '@/components/page-header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target } from 'lucide-react';
+import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, Users } from 'lucide-react';
 import Image from 'next/image';
 
 const features = [
@@ -64,6 +64,14 @@ const features = [
     href: '/smart-notes',
     image: 'https://placehold.co/600x400',
     aiHint: 'notebook study',
+  },
+   {
+    icon: Users,
+    title: 'Community Forum',
+    description: 'Ask questions and learn from the community.',
+    href: '/community-forum',
+    image: 'https://placehold.co/600x400',
+    aiHint: 'people talking forum',
   },
 ];
 
