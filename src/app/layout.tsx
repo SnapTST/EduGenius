@@ -1,5 +1,4 @@
 
-
 import './globals.css';
 import { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
@@ -40,4 +39,3 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     </html>
   );
 }
-
