@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, ListOrdered, PenSquare, LifeBuoy, Mail } from 'lucide-react';
 import Image from 'next/image';
 import DisplayAd from '@/components/ads/display-ad';
+import { generateImage } from '@/ai/flows/generate-image';
 
 const features = [
   {
@@ -109,7 +110,20 @@ const features = [
 ];
 
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+
+  const imagePromises = features.map(feature => 
+    generateImage({ prompt: feature.aiHint })
+      .then(result => ({ ...feature, image: result.imageDataUri }))
+      .catch(error => {
+        console.error(`Failed to generate image for "${feature.title}":`, error);
+        return { ...feature, image: 'https://placehold.co/600x400.png' }; // Fallback
+      })
+  );
+
+  const featuresWithImages = await Promise.all(imagePromises);
+
+
   return (
     <AppLayout>
       <PageHeader
@@ -118,7 +132,7 @@ export default function DashboardPage() {
       />
       <DisplayAd />
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-        {features.map((feature) => (
+        {featuresWithImages.map((feature) => (
             <Card key={feature.href} className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl">
                 <CardHeader className="flex flex-row items-center gap-4 pb-4">
                     <div className="p-3 rounded-md bg-primary/10 text-primary">
