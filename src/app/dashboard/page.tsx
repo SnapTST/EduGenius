@@ -4,10 +4,26 @@ import { PageHeader } from '@/components/page-header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { FileText, BookOpen, FileSearch, ArrowRight, Layers, ScanLine } from 'lucide-react';
+import { FileText, BookOpen, FileSearch, ArrowRight, Layers, ScanLine, BrainCircuit, Bot } from 'lucide-react';
 import Image from 'next/image';
 
 const features = [
+  {
+    icon: Bot,
+    title: 'AI Tutor',
+    description: 'Ask any question and get instant, expert explanations.',
+    href: '/ai-tutor',
+    image: 'https://placehold.co/600x400',
+    aiHint: 'robot teaching',
+  },
+  {
+    icon: BrainCircuit,
+    title: 'Project Assistant',
+    description: 'Get creative and scientific ideas for your next school project.',
+    href: '/project-assistant',
+    image: 'https://placehold.co/600x400',
+    aiHint: 'science project',
+  },
   {
     icon: ScanLine,
     title: 'Textbook Chapter Scanner',
