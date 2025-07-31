@@ -1,4 +1,5 @@
 
+'use client';
 
 import { AppLayout } from '@/components/app-layout';
 import { PageHeader } from '@/components/page-header';
@@ -84,7 +85,7 @@ const features = [
 ];
 
 
-export default async function DashboardPage() {
+export default function DashboardPage() {
   return (
     <AppLayout>
       <PageHeader
