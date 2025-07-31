@@ -5,7 +5,7 @@ import { PageHeader } from '@/components/page-header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, Users, Swords } from 'lucide-react';
+import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, Users, Swords, Video } from 'lucide-react';
 import Image from 'next/image';
 
 const features = [
@@ -72,6 +72,14 @@ const features = [
     href: '/interactive-notes',
     image: 'https://placehold.co/600x400',
     aiHint: 'notebook study',
+  },
+   {
+    icon: Video,
+    title: 'Video Library',
+    description: 'Watch curated educational videos by topic.',
+    href: '/video-library',
+    image: 'https://placehold.co/600x400',
+    aiHint: 'video play button',
   },
    {
     icon: Users,
