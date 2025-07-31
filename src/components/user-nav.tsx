@@ -1,6 +1,7 @@
 
 'use client';
 
+import * as React from 'react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -13,6 +14,18 @@ import { useTheme } from 'next-themes';
 
 export function UserNav() {
   const { setTheme, theme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    // Render a placeholder or nothing on the server to avoid hydration mismatch
+    return (
+      <div className="h-10 w-10" />
+    );
+  }
 
   return (
     <DropdownMenu>
