@@ -5,7 +5,7 @@ import { PageHeader } from '@/components/page-header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, Users, Swords, Video } from 'lucide-react';
+import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, Users, Swords, Video, ListOrdered } from 'lucide-react';
 import Image from 'next/image';
 
 const features = [
@@ -48,6 +48,14 @@ const features = [
     href: '/project-assistant',
     image: 'https://placehold.co/600x400',
     aiHint: 'science project',
+  },
+  {
+    icon: ListOrdered,
+    title: 'Homework Helper',
+    description: 'Upload homework questions and get step-by-step answers.',
+    href: '/homework-helper',
+    image: 'https://placehold.co/600x400',
+    aiHint: 'homework paper steps',
   },
   {
     icon: ScanLine,

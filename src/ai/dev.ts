@@ -9,3 +9,4 @@ import '@/ai/flows/project-assistant.ts';
 import '@/ai/flows/ai-tutor.ts';
 import '@/ai/flows/doubt-solver.ts';
 import '@/ai/flows/generate-quiz.ts';
+import '@/ai/flows/homework-helper.ts';
