@@ -23,6 +23,7 @@ import { Upload, ArrowLeft, ArrowRight, RotateCw, Lightbulb } from 'lucide-react
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
+import InArticleAd1 from '@/components/ads/in-article-ad-1';
 
 const formSchema = z.object({
   documentDataUri: z.string().refine((val) => val.startsWith('data:'), {
@@ -231,7 +232,12 @@ export default function InteractiveNotesPage() {
                         <p>Your generated summary will appear here.</p>
                     </div>
                     )}
-                    {summary && <div className="prose prose-sm max-w-none font-body" dangerouslySetInnerHTML={{ __html: summary.replace(/\\n/g, '<br />') }} />}
+                    {summary && (
+                        <>
+                            <div className="prose prose-sm max-w-none font-body" dangerouslySetInnerHTML={{ __html: summary.replace(/\\n/g, '<br />') }} />
+                            <InArticleAd1 />
+                        </>
+                    )}
                 </CardContent>
             </Card>
 

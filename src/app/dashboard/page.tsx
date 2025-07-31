@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, ListOrdered, PenSquare, LifeBuoy, Mail } from 'lucide-react';
 import Image from 'next/image';
+import DisplayAd from '@/components/ads/display-ad';
 
 const features = [
   {
@@ -115,7 +116,7 @@ export default function DashboardPage() {
         title="Welcome back, Student!"
         description="Ready to ace your exams? Let's get started."
       />
-
+      <DisplayAd />
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
         {features.map((feature) => (
             <Card key={feature.href} className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl">

@@ -18,6 +18,7 @@ import { essayWriter } from '@/ai/flows/essay-writer';
 import { Loader } from '@/components/loader';
 import { PenSquare, Copy, Check } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
+import InArticleAd2 from '@/components/ads/in-article-ad-2';
 
 const formSchema = z.object({
   topic: z.string().min(5, 'Please enter a clear topic or title.'),
@@ -161,7 +162,7 @@ export default function EssayWriterPage() {
                           <FormControl>
                             <SelectTrigger>
                               <SelectValue placeholder="Select tone" />
-                            </SelectTrigger>
+                            </Trigger>
                           </FormControl>
                           <SelectContent>
                             <SelectItem value="academic">Academic</SelectItem>
@@ -209,12 +210,15 @@ export default function EssayWriterPage() {
                   </div>
                 )}
                 {generatedContent && (
-                  <Textarea
-                    readOnly
-                    value={generatedContent}
-                    className="w-full h-[500px] resize-none font-body text-sm whitespace-pre-wrap"
-                    placeholder="Generated content will appear here"
-                  />
+                  <>
+                    <Textarea
+                        readOnly
+                        value={generatedContent}
+                        className="w-full h-[500px] resize-none font-body text-sm whitespace-pre-wrap"
+                        placeholder="Generated content will appear here"
+                    />
+                    <InArticleAd2 />
+                  </>
                 )}
               </div>
             </CardContent>
