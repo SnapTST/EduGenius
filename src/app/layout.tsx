@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import './globals.css';
 import { cn } from '@/lib/utils';
@@ -5,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import Script from 'next/script';
 import { ThemeProvider } from '@/components/theme-provider';
 import ProgressBar from '@/components/progress-bar';
+import { AuthProvider } from '@/context/auth-context';
 
 export const metadata: Metadata = {
   title: 'EduGenius',
@@ -33,16 +35,18 @@ export default function RootLayout({
         />
       </head>
       <body className={cn('font-body antialiased min-h-screen')}>
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-        >
-            <ProgressBar />
-            {children}
-            <Toaster />
-        </ThemeProvider>
+        <AuthProvider>
+            <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+            >
+                <ProgressBar />
+                {children}
+                <Toaster />
+            </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );
