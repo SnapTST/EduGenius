@@ -245,16 +245,14 @@ export default function TestGeneratorPage() {
                 {testPaper && <PrintButton />}
               </div>
             </CardHeader>
-            <CardContent>
-              <div ref={printableRef} className="printable-container">
-                {isLoading && <Loader />}
-                {!isLoading && !testPaper && (
-                  <div className="text-center text-muted-foreground py-16">
-                    <p>Your generated test will appear here.</p>
-                  </div>
-                )}
-                {testPaper && <pre className="whitespace-pre-wrap font-body text-sm">{testPaper}</pre>}
-              </div>
+            <CardContent ref={printableRef} className="printable-container">
+              {isLoading && <Loader />}
+              {!isLoading && !testPaper && (
+                <div className="text-center text-muted-foreground py-16">
+                  <p>Your generated test will appear here.</p>
+                </div>
+              )}
+              {testPaper && <pre className="whitespace-pre-wrap font-body text-sm">{testPaper}</pre>}
             </CardContent>
           </Card>
         </div>
