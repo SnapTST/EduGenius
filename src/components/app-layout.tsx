@@ -7,13 +7,14 @@ import Link from 'next/link';
 import { SidebarProvider, Sidebar, SidebarTrigger, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarHeader, SidebarFooter, SidebarRail } from '@/components/ui/sidebar';
 import { Logo } from '@/components/logo';
 import { UserNav } from '@/components/user-nav';
-import { LayoutDashboard, FileText, BookOpen, FileSearch } from 'lucide-react';
+import { LayoutDashboard, FileText, BookOpen, FileSearch, Layers } from 'lucide-react';
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
   { href: '/test-generator', icon: FileText, label: 'AI Test Generator' },
   { href: '/smart-notes', icon: BookOpen, label: 'Smart Notes' },
   { href: '/past-paper-matcher', icon: FileSearch, label: 'Past Paper Matcher' },
+  { href: '/flashcard-creator', icon: Layers, label: 'Flashcard Creator' },
 ];
 
 export function AppLayout({ children }: { children: React.ReactNode }) {

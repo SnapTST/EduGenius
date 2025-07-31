@@ -4,7 +4,7 @@ import { PageHeader } from '@/components/page-header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { FileText, BookOpen, FileSearch, ArrowRight } from 'lucide-react';
+import { FileText, BookOpen, FileSearch, ArrowRight, Layers } from 'lucide-react';
 import Image from 'next/image';
 
 const features = [
@@ -32,6 +32,14 @@ const features = [
     image: 'https://placehold.co/600x400',
     aiHint: 'library books',
   },
+  {
+    icon: Layers,
+    title: 'Flashcard Creator',
+    description: 'Generate flashcards from your notes or textbook content.',
+    href: '/flashcard-creator',
+    image: 'https://placehold.co/600x400',
+    aiHint: 'flashcards studying',
+  },
 ];
 
 
@@ -43,7 +51,7 @@ export default function DashboardPage() {
         description="Ready to ace your exams? Let's get started."
       />
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
         {features.map((feature) => (
             <Card key={feature.href} className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl">
                 <CardHeader className="flex flex-row items-center gap-4 pb-4">
