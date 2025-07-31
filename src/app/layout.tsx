@@ -25,10 +25,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body className={cn('font-body antialiased min-h-screen')}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <ProgressBar />
-            {children}
-            <Toaster />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+        >
+          <ProgressBar />
+          {children}
+          <Toaster />
         </ThemeProvider>
         <AdScript />
       </body>
