@@ -259,7 +259,7 @@ export default function InteractiveNotesPage() {
                             </div>
                         )}
                         {flashcards && flashcards.length > 0 && (
-                            <div className="w-full">
+                           <div className="w-full">
                                 <div className="relative h-64 w-full" style={{ perspective: 1000 }}>
                                     <AnimatePresence initial={false}>
                                         <motion.div
@@ -272,28 +272,25 @@ export default function InteractiveNotesPage() {
                                             style={{ transformStyle: "preserve-3d" }}
                                         >
                                             <motion.div
-                                                className={cn("absolute w-full h-full rounded-lg shadow-lg flex items-center justify-center p-6 text-center text-lg font-semibold cursor-pointer", 'bg-primary text-primary-foreground')}
+                                                className="absolute w-full h-full rounded-lg shadow-lg cursor-pointer"
                                                 style={{ backfaceVisibility: "hidden" }}
+                                                onClick={flipCard}
                                                 animate={{ rotateY: isFlipped ? 180 : 0 }}
                                                 transition={{ duration: 0.4 }}
-                                                onClick={flipCard}
                                             >
-                                                <div>
-                                                    <h3 className="text-sm font-bold uppercase text-primary-foreground/70 mb-2">Question</h3>
-                                                    {flashcards[currentCard].question}
+                                                {/* Front of the card */}
+                                                <div className="absolute w-full h-full rounded-lg flex items-center justify-center p-6 text-center text-lg font-semibold bg-primary text-primary-foreground">
+                                                    <div>
+                                                        <h3 className="text-sm font-bold uppercase text-primary-foreground/70 mb-2">Question</h3>
+                                                        {flashcards[currentCard].question}
+                                                    </div>
                                                 </div>
-                                            </motion.div>
-
-                                            <motion.div
-                                                className={cn("absolute w-full h-full rounded-lg shadow-lg flex items-center justify-center p-6 text-center text-lg font-semibold cursor-pointer", 'bg-secondary')}
-                                                style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
-                                                animate={{ rotateY: isFlipped ? 0 : -180 }}
-                                                transition={{ duration: 0.4 }}
-                                                onClick={flipCard}
-                                            >
-                                                <div>
-                                                    <h3 className="text-sm font-bold uppercase text-muted-foreground mb-2">Answer</h3>
-                                                    {flashcards[currentCard].answer}
+                                                {/* Back of the card */}
+                                                <div className="absolute w-full h-full rounded-lg flex items-center justify-center p-6 text-center text-lg font-semibold bg-secondary" style={{ transform: "rotateY(180deg)" }}>
+                                                    <div>
+                                                        <h3 className="text-sm font-bold uppercase text-muted-foreground mb-2">Answer</h3>
+                                                        {flashcards[currentCard].answer}
+                                                    </div>
                                                 </div>
                                             </motion.div>
                                         </motion.div>
