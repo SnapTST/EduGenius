@@ -34,11 +34,8 @@ export default function LandingPage() {
             <span className="text-xl font-bold font-headline">EduGenius</span>
         </div>
         <div>
-            <Button asChild variant="ghost">
-                <Link href="/login">Login</Link>
-            </Button>
             <Button asChild>
-                <Link href="/signup">Get Started <ArrowRight className="ml-2" /></Link>
+                <Link href="/dashboard">Get Started <ArrowRight className="ml-2" /></Link>
             </Button>
         </div>
       </header>
@@ -52,9 +49,6 @@ export default function LandingPage() {
         </p>
         <div className="mt-8 flex justify-center gap-4">
              <Button asChild size="lg">
-                <Link href="/signup">Sign Up for Free</Link>
-            </Button>
-             <Button asChild size="lg" variant="outline">
                 <Link href="/dashboard">Explore Features</Link>
             </Button>
         </div>

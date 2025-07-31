@@ -4,7 +4,6 @@ import { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/components/theme-provider';
 import AdScript from '@/components/ad-script';
-import { AuthProvider } from '@/context/auth-context';
 import { Toaster } from '@/components/ui/toaster';
 import ProgressBar from '@/components/progress-bar';
 
@@ -27,10 +26,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className={cn('font-body antialiased min-h-screen')}>
         <ProgressBar />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <AuthProvider>
             {children}
             <Toaster />
-          </AuthProvider>
         </ThemeProvider>
         <AdScript />
       </body>

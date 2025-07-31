@@ -1,91 +1,41 @@
-
 'use client';
 
-import * as React from 'react';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Moon, Sun } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
-// Define the User type
-type User = {
-  name: string;
-  email: string;
-};
-
-// Define the context type
-type AuthContextType = {
-  user: User | null;
-  loading: boolean;
-  login: (email: string, password: string) => boolean;
-  signup: (name: string, email: string, password: string) => boolean;
-  logout: () => void;
-};
-
-// Create the context with a default undefined value
-const AuthContext = React.createContext<AuthContextType | undefined>(undefined);
-
-// Define the AuthProvider component
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = React.useState<User | null>(null);
-  const [loading, setLoading] = React.useState(true);
-
-  React.useEffect(() => {
-    // Check for a logged-in user in localStorage when the app loads
-    const storedUser = localStorage.getItem('currentUser');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-    setLoading(false);
-  }, []);
-
-  const login = (email: string, password: string): boolean => {
-    const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
-    const foundUser = storedUsers.find(
-      (u: any) => u.email === email && u.password === password
-    );
-
-    if (foundUser) {
-      const { password, ...userToStore } = foundUser;
-      setUser(userToStore);
-      localStorage.setItem('currentUser', JSON.stringify(userToStore));
-      return true;
-    }
-    return false;
-  };
-
-  const signup = (name: string, email: string, password: string): boolean => {
-    const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
-    const userExists = storedUsers.some((u: any) => u.email === email);
-
-    if (userExists) {
-      return false; // User with this email already exists
-    }
-
-    const newUser = { name, email, password };
-    const updatedUsers = [...storedUsers, newUser];
-    localStorage.setItem('users', JSON.stringify(updatedUsers));
-    
-    const { password: _, ...userToStore } = newUser;
-    setUser(userToStore);
-    localStorage.setItem('currentUser', JSON.stringify(userToStore));
-    
-    return true;
-  };
-
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('currentUser');
-  };
+export function UserNav() {
+  const { setTheme, theme } = useTheme();
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, signup, logout }}>
-      {children}
-    </AuthContext.Provider>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+         <Button variant="ghost" size="icon">
+            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            <span className="sr-only">Toggle theme</span>
+          </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56" align="end" forceMount>
+           <DropdownMenuItem onClick={() => setTheme('light')}>
+                <Sun className="mr-2 h-4 w-4" />
+                <span>Light</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setTheme('dark')}>
+                <Moon className="mr-2 h-4 w-4" />
+                <span>Dark</span>
+            </DropdownMenuItem>
+             <DropdownMenuItem onClick={() => setTheme('system')}>
+                <Sun className="mr-2 h-4 w-4" />
+                <span>System</span>
+            </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
-
-// Custom hook to use the auth context
-export const useAuth = () => {
-  const context = React.useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-};
