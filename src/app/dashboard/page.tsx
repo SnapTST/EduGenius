@@ -5,7 +5,7 @@ import { PageHeader } from '@/components/page-header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, ListOrdered, PenSquare, LifeBuoy, Mail } from 'lucide-react';
+import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, ListOrdered, PenSquare, LifeBuoy, Mail, Award } from 'lucide-react';
 import Image from 'next/image';
 
 const features = [
@@ -115,6 +115,21 @@ export default function DashboardPage() {
         title="Welcome back, Student!"
         description="Ready to ace your exams? Let's get started."
       />
+
+        <Card className="mb-8 bg-primary/10 border-primary/20">
+            <CardContent className="p-6 flex flex-col md:flex-row items-center gap-6">
+                <div className="p-4 bg-primary/20 rounded-full text-primary">
+                    <Award className="w-10 h-10" />
+                </div>
+                <div className="flex-1 text-center md:text-left">
+                    <CardTitle className="font-headline text-xl">Unlock Premium Features!</CardTitle>
+                    <CardDescription className="mt-1">Go ad-free, get unlimited access, and more with EduGenius Pro.</CardDescription>
+                </div>
+                <Button asChild className="mt-4 md:mt-0 flex-shrink-0">
+                    <Link href="#">Upgrade Now</Link>
+                </Button>
+            </CardContent>
+        </Card>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
         {features.map((feature) => (
