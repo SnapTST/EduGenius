@@ -4,7 +4,7 @@ import { PageHeader } from '@/components/page-header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { FileText, BookOpen, FileSearch, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle } from 'lucide-react';
+import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target } from 'lucide-react';
 import Image from 'next/image';
 
 const features = [
@@ -23,6 +23,14 @@ const features = [
     href: '/doubt-solver',
     image: 'https://placehold.co/600x400',
     aiHint: 'question mark bubble',
+  },
+    {
+    icon: Target,
+    title: 'Daily Practice',
+    description: 'Take interactive quizzes to test your knowledge.',
+    href: '/daily-practice',
+    image: 'https://placehold.co/600x400',
+    aiHint: 'quiz test',
   },
   {
     icon: BrainCircuit,
@@ -55,14 +63,6 @@ const features = [
     href: '/smart-notes',
     image: 'https://placehold.co/600x400',
     aiHint: 'notebook study',
-  },
-  {
-    icon: FileSearch,
-    title: 'Past Paper Matcher',
-    description: 'Find relevant past exam questions for any chapter.',
-    href: '/past-paper-matcher',
-    image: 'https://placehold.co/600x400',
-    aiHint: 'library books',
   },
   {
     icon: Layers,

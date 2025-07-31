@@ -7,17 +7,17 @@ import Link from 'next/link';
 import { SidebarProvider, Sidebar, SidebarTrigger, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarHeader, SidebarFooter, SidebarRail } from '@/components/ui/sidebar';
 import { Logo } from '@/components/logo';
 import { UserNav } from '@/components/user-nav';
-import { LayoutDashboard, FileText, BookOpen, FileSearch, Layers, ScanLine, BrainCircuit, Bot, HelpCircle } from 'lucide-react';
+import { LayoutDashboard, FileText, BookOpen, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target } from 'lucide-react';
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
   { href: '/ai-tutor', icon: Bot, label: 'AI Tutor' },
   { href: '/doubt-solver', icon: HelpCircle, label: 'Doubt Solver' },
+  { href: '/daily-practice', icon: Target, label: 'Daily Practice' },
   { href: '/project-assistant', icon: BrainCircuit, label: 'Project Assistant' },
   { href: '/chapter-scanner', icon: ScanLine, label: 'Chapter Scanner' },
   { href: '/test-generator', icon: FileText, label: 'AI Test Generator' },
   { href: '/smart-notes', icon: BookOpen, label: 'Smart Notes' },
-  { href: '/past-paper-matcher', icon: FileSearch, label: 'Past Paper Matcher' },
   { href: '/flashcard-creator', icon: Layers, label: 'Flashcard Creator' },
 ];
 
