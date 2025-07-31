@@ -270,27 +270,30 @@ export default function InteractiveNotesPage() {
                                             exit={{ opacity: 0, x: -50, scale: 0.9 }}
                                             transition={{ duration: 0.2 }}
                                             style={{ transformStyle: "preserve-3d" }}
+                                            onClick={flipCard}
                                         >
                                             <motion.div
-                                                className="absolute w-full h-full rounded-lg shadow-lg cursor-pointer"
+                                                className="absolute w-full h-full rounded-lg shadow-lg flex items-center justify-center p-6 text-center text-lg font-semibold bg-primary text-primary-foreground"
                                                 style={{ backfaceVisibility: "hidden" }}
-                                                onClick={flipCard}
-                                                animate={{ rotateY: isFlipped ? 180 : 0 }}
+                                                animate={{ rotateY: isFlipped ? -180 : 0 }}
                                                 transition={{ duration: 0.4 }}
                                             >
                                                 {/* Front of the card */}
-                                                <div className="absolute w-full h-full rounded-lg flex items-center justify-center p-6 text-center text-lg font-semibold bg-primary text-primary-foreground">
-                                                    <div>
-                                                        <h3 className="text-sm font-bold uppercase text-primary-foreground/70 mb-2">Question</h3>
-                                                        {flashcards[currentCard].question}
-                                                    </div>
+                                                <div>
+                                                    <h3 className="text-sm font-bold uppercase text-primary-foreground/70 mb-2">Question</h3>
+                                                    {flashcards[currentCard].question}
                                                 </div>
-                                                {/* Back of the card */}
-                                                <div className="absolute w-full h-full rounded-lg flex items-center justify-center p-6 text-center text-lg font-semibold bg-secondary" style={{ transform: "rotateY(180deg)" }}>
-                                                    <div>
-                                                        <h3 className="text-sm font-bold uppercase text-muted-foreground mb-2">Answer</h3>
-                                                        {flashcards[currentCard].answer}
-                                                    </div>
+                                            </motion.div>
+                                            {/* Back of the card */}
+                                            <motion.div
+                                                className="absolute w-full h-full rounded-lg shadow-lg flex items-center justify-center p-6 text-center text-lg font-semibold bg-secondary"
+                                                style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)"}}
+                                                animate={{ rotateY: isFlipped ? 0 : 180 }}
+                                                transition={{ duration: 0.4 }}
+                                            >
+                                                <div>
+                                                    <h3 className="text-sm font-bold uppercase text-muted-foreground mb-2">Answer</h3>
+                                                    {flashcards[currentCard].answer}
                                                 </div>
                                             </motion.div>
                                         </motion.div>
