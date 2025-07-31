@@ -1,3 +1,4 @@
+
 import './globals.css';
 import { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
@@ -5,9 +6,8 @@ import { ThemeProvider } from '@/components/theme-provider';
 import AdScript from '@/components/ad-script';
 import { Toaster } from '@/components/ui/toaster';
 import ProgressBar from '@/components/progress-bar';
-import { Metadata } from 'next';
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'EduGenius',
   description: 'Your AI-Powered Study Partner',
 };
@@ -38,3 +38,4 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </body>
     </html>
   );
+}
