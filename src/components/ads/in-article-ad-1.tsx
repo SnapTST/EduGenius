@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 declare global {
     interface Window {
@@ -9,16 +9,26 @@ declare global {
 }
 
 const InArticleAd1 = () => {
+  const adRef = useRef<HTMLDivElement>(null);
+  const initialized = useRef(false);
+
   useEffect(() => {
-    try {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (err) {
-      console.error(err);
+    if (initialized.current) {
+        return;
+    }
+
+    if (adRef.current && adRef.current.children.length === 0) {
+      try {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+          initialized.current = true;
+      } catch (err) {
+        console.error(err);
+      }
     }
   }, []);
 
   return (
-    <div className="my-4">
+    <div ref={adRef} className="my-4">
         <ins className="adsbygoogle"
             style={{ display: 'block', textAlign: 'center' }}
             data-ad-layout="in-article"
