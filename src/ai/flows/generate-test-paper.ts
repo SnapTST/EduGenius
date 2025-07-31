@@ -14,7 +14,12 @@ import {z} from 'genkit';
 const GenerateTestPaperInputSchema = z.object({
   topics: z
     .string()
-    .describe('Comma-separated list of topics to include in the test.'),
+    .describe('Comma-separated list of topics to include in the test. This can also be a description of the uploaded document.'),
+  documentDataUri: z
+    .string()
+    .describe(
+      "An optional document (image or PDF) of textbook content, as a data URI that must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'."
+    ).optional(),
   difficulty: z
     .enum(['easy', 'medium', 'hard'])
     .describe('The difficulty level of the test.'),
@@ -49,9 +54,12 @@ const prompt = ai.definePrompt({
   output: {schema: GenerateTestPaperOutputSchema},
   prompt: `You are an expert educator, skilled in creating test papers for students.
 
-  Generate a test paper based on the following criteria:
+  Generate a test paper based on the following criteria. If a document is provided, use it as the primary source of content for the questions. The topics list can provide additional context.
 
   Topics: {{{topics}}}
+  {{#if documentDataUri}}
+  Document: {{media url=documentDataUri}}
+  {{/if}}
   Difficulty: {{{difficulty}}}
   Number of Questions: {{{numberOfQuestions}}}
   Marks per Question: {{{marksPerQuestion}}}

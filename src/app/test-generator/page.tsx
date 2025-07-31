@@ -17,10 +17,12 @@ import { useToast } from '@/hooks/use-toast';
 import { generateTestPaper } from '@/ai/flows/generate-test-paper';
 import { Loader } from '@/components/loader';
 import { PrintButton } from '@/components/print-button';
+import { Upload } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 
 const formSchema = z.object({
   topics: z.string().min(3, 'Please enter at least one topic.'),
+  documentDataUri: z.string().optional(),
   difficulty: z.enum(['easy', 'medium', 'hard']),
   numberOfQuestions: z.coerce.number().int().min(1).max(20),
   marksPerQuestion: z.coerce.number().int().min(1).max(10),
@@ -31,6 +33,7 @@ export default function TestGeneratorPage() {
   const [testPaper, setTestPaper] = React.useState<string | null>(null);
   const { toast } = useToast();
   const printableRef = React.useRef<HTMLDivElement>(null);
+  const [fileName, setFileName] = React.useState<string>('');
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -41,6 +44,25 @@ export default function TestGeneratorPage() {
       marksPerQuestion: 2,
     },
   });
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setFileName(file.name);
+      const reader = new FileReader();
+      reader.onload = (loadEvent) => {
+        const dataUri = loadEvent.target?.result as string;
+        form.setValue('documentDataUri', dataUri);
+        // Maybe clear topics field if a file is uploaded? Or combine them in the prompt.
+        // For now, let's assume the prompt handles it.
+        if(!form.getValues('topics')) {
+          form.setValue('topics', file.name); // Use filename as topics if empty
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
@@ -74,7 +96,7 @@ export default function TestGeneratorPage() {
         <Card>
           <CardHeader>
             <CardTitle className="font-headline">Test Details</CardTitle>
-            <CardDescription>Fill in the details to generate your test.</CardDescription>
+            <CardDescription>Fill in the details to generate your test from topics or an uploaded document.</CardDescription>
           </CardHeader>
           <CardContent>
             <Form {...form}>
@@ -84,7 +106,7 @@ export default function TestGeneratorPage() {
                   name="topics"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Topics</FormLabel>
+                      <FormLabel>Topics (or describe document)</FormLabel>
                       <FormControl>
                         <Input placeholder="e.g., Algebra, Photosynthesis, World War II" {...field} />
                       </FormControl>
@@ -92,6 +114,42 @@ export default function TestGeneratorPage() {
                     </FormItem>
                   )}
                 />
+                 <FormField
+                  control={form.control}
+                  name="documentDataUri"
+                  render={() => (
+                    <FormItem>
+                      <FormLabel>Upload Document (Optional)</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <Input
+                            id="file-upload"
+                            type="file"
+                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                            accept="image/*,application/pdf"
+                            onChange={handleFileChange}
+                          />
+                          <label
+                            htmlFor="file-upload"
+                            className="flex items-center justify-center w-full h-32 px-4 text-center border-2 border-dashed rounded-md border-border text-muted-foreground cursor-pointer hover:border-primary hover:text-primary transition-colors"
+                          >
+                            {fileName ? (
+                              <span>{fileName}</span>
+                            ) : (
+                              <div className="flex flex-col items-center gap-1">
+                                <Upload className="w-8 h-8" />
+                                <span>Click to upload or drag and drop</span>
+                                <span className="text-xs">PDF or Image file</span>
+                              </div>
+                            )}
+                          </label>
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <FormField
                     control={form.control}
