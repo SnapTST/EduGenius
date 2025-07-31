@@ -1,4 +1,5 @@
 
+
 import { AppLayout } from '@/components/app-layout';
 import { PageHeader } from '@/components/page-header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -58,19 +59,11 @@ const features = [
   },
   {
     icon: BookOpen,
-    title: 'Smart Notes',
-    description: 'Summarize textbook pages into concise notes.',
+    title: 'Interactive Notes',
+    description: 'Summarize documents and create flashcards.',
     href: '/smart-notes',
     image: 'https://placehold.co/600x400',
     aiHint: 'notebook study',
-  },
-  {
-    icon: Layers,
-    title: 'Flashcard Creator',
-    description: 'Generate flashcards from your notes or textbook content.',
-    href: '/flashcard-creator',
-    image: 'https://placehold.co/600x400',
-    aiHint: 'flashcards studying',
   },
 ];
 
@@ -111,3 +104,5 @@ export default function DashboardPage() {
     </AppLayout>
   );
 }
+
+    

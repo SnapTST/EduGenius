@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import * as React from 'react';
@@ -17,8 +18,7 @@ const navItems = [
   { href: '/project-assistant', icon: BrainCircuit, label: 'Project Assistant' },
   { href: '/chapter-scanner', icon: ScanLine, label: 'Chapter Scanner' },
   { href: '/test-generator', icon: FileText, label: 'AI Test Generator' },
-  { href: '/smart-notes', icon: BookOpen, label: 'Smart Notes' },
-  { href: '/flashcard-creator', icon: Layers, label: 'Flashcard Creator' },
+  { href: '/smart-notes', icon: BookOpen, label: 'Interactive Notes' },
 ];
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
@@ -70,3 +70,5 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
     </SidebarProvider>
   );
 }
+
+    
