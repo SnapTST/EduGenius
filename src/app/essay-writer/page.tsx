@@ -1,227 +1,82 @@
+
 'use client';
 
-import * as React from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { AppLayout } from '@/components/app-layout';
-import { PageHeader } from '@/components/page-header';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useToast } from '@/hooks/use-toast';
-import { essayWriter } from '@/ai/flows/essay-writer';
-import { Loader } from '@/components/loader';
-import { PenSquare, Copy, Check } from 'lucide-react';
-import { Textarea } from '@/components/ui/textarea';
-import InArticleAd2 from '@/components/ads/in-article-ad-2';
+import { Logo } from '@/components/logo';
+import { ArrowRight, BookOpenCheck, Bot, BrainCircuit } from 'lucide-react';
+import Link from 'next/link';
 
-const formSchema = z.object({
-  topic: z.string().min(5, 'Please enter a clear topic or title.'),
-  type: z.enum(['persuasive', 'narrative', 'expository', 'descriptive', 'creative']),
-  length: z.enum(['short', 'medium', 'long']),
-  tone: z.enum(['formal', 'informal', 'academic', 'journalistic', 'creative']),
-});
-
-export default function EssayWriterPage() {
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [generatedContent, setGeneratedContent] = React.useState<string | null>(null);
-  const [isCopied, setIsCopied] = React.useState(false);
-  const { toast } = useToast();
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      topic: '',
-      type: 'expository',
-      length: 'medium',
-      tone: 'academic',
+const features = [
+    {
+        icon: <Bot className="h-8 w-8 text-primary" />,
+        title: "AI-Powered Tools",
+        description: "From an AI Tutor to a Test Generator, get help with all your study needs."
     },
-  });
-
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true);
-    setGeneratedContent(null);
-    try {
-      const result = await essayWriter(values);
-      setGeneratedContent(result.content);
-      toast({
-        title: 'Content Generated!',
-        description: 'Your essay/story is ready.',
-      });
-    } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
-        description: 'There was a problem generating your content. Please try again.',
-      });
-      console.error(error);
-    } finally {
-      setIsLoading(false);
+    {
+        icon: <BookOpenCheck className="h-8 w-8 text-primary" />,
+        title: "Interactive Learning",
+        description: "Generate summaries, create flashcards, and practice with interactive quizzes."
+    },
+    {
+        icon: <BrainCircuit className="h-8 w-8 text-primary" />,
+        title: "Project Assistance",
+        description: "Get creative ideas and a list of materials for your next school project."
     }
-  }
+]
 
-  const handleCopyToClipboard = () => {
-    if (generatedContent) {
-      navigator.clipboard.writeText(generatedContent);
-      setIsCopied(true);
-      toast({ title: 'Copied to clipboard!' });
-      setTimeout(() => setIsCopied(false), 2000);
-    }
-  };
-
+export default function LandingPage() {
   return (
-    <AppLayout>
-      <PageHeader
-        title="Essay & Story Writer"
-        description="Generate high-quality written content for your assignments in seconds."
-      />
-      <div className="grid lg:grid-cols-2 gap-8 items-start">
-        <Card>
-          <CardHeader>
-            <CardTitle className="font-headline">Writing Requirements</CardTitle>
-            <CardDescription>Fill in the details to generate your content.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField
-                  control={form.control}
-                  name="topic"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Topic / Title</FormLabel>
-                      <FormControl>
-                        <Input placeholder="e.g., The Impact of AI on Society" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                    control={form.control}
-                    name="type"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Type of Writing</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select type" />
-                            </Trigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="expository">Expository</SelectItem>
-                            <SelectItem value="persuasive">Persuasive</SelectItem>
-                            <SelectItem value="narrative">Narrative</SelectItem>
-                            <SelectItem value="descriptive">Descriptive</SelectItem>
-                            <SelectItem value="creative">Creative</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <FormField
-                    control={form.control}
-                    name="length"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Length</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select length" />
-                            </Trigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="short">Short</SelectItem>
-                            <SelectItem value="medium">Medium</SelectItem>
-                            <SelectItem value="long">Long</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                   <FormField
-                    control={form.control}
-                    name="tone"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Tone</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select tone" />
-                            </Trigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="academic">Academic</SelectItem>
-                            <SelectItem value="formal">Formal</SelectItem>
-                            <SelectItem value="informal">Informal</SelectItem>
-                            <SelectItem value="journalistic">Journalistic</SelectItem>
-                            <SelectItem value="creative">Creative</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <Button type="submit" disabled={isLoading} className="w-full">
-                  <PenSquare className="mr-2" />
-                  {isLoading ? 'Writing...' : 'Generate Content'}
-                </Button>
-              </form>
-            </Form>
-          </CardContent>
-        </Card>
-
-        <div className="sticky top-24">
-          <Card className="min-h-[400px]">
-            <CardHeader>
-              <div className="flex justify-between items-center">
-                <div>
-                  <CardTitle className="font-headline">Generated Content</CardTitle>
-                  <CardDescription>Review your generated essay or story below.</CardDescription>
-                </div>
-                {generatedContent && (
-                  <Button variant="outline" size="icon" onClick={handleCopyToClipboard}>
-                    {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                  </Button>
-                )}
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="printable-container">
-                {isLoading && <Loader />}
-                {!isLoading && !generatedContent && (
-                  <div className="text-center text-muted-foreground py-16">
-                    <p>Your generated content will appear here.</p>
-                  </div>
-                )}
-                {generatedContent && (
-                  <>
-                    <Textarea
-                        readOnly
-                        value={generatedContent}
-                        className="w-full h-[500px] resize-none font-body text-sm whitespace-pre-wrap"
-                        placeholder="Generated content will appear here"
-                    />
-                    <InArticleAd2 />
-                  </>
-                )}
-              </div>
-            </CardContent>
-          </Card>
+    <main className="flex min-h-screen flex-col items-center bg-background p-4">
+       <header className="w-full max-w-6xl mx-auto py-4 flex justify-between items-center">
+        <div className="flex items-center gap-2">
+            <Logo />
+            <span className="text-xl font-bold font-headline">EduGenius</span>
         </div>
-      </div>
-    </AppLayout>
+        <div>
+            <Button asChild>
+                <Link href="/dashboard">Get Started <ArrowRight className="ml-2" /></Link>
+            </Button>
+        </div>
+      </header>
+
+      <section className="text-center py-20 lg:py-32">
+        <h1 className="text-4xl lg:text-6xl font-extrabold font-headline tracking-tight">
+            Your AI-Powered Study Partner
+        </h1>
+        <p className="mt-4 text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
+            EduGenius provides a suite of AI tools designed to help you study smarter, not harder. Ace your exams, get project ideas, and solve doubts instantly.
+        </p>
+        <div className="mt-8 flex justify-center gap-4">
+             <Button asChild size="lg">
+                <Link href="/dashboard">Explore Features</Link>
+            </Button>
+        </div>
+      </section>
+
+      <section className="w-full max-w-6xl mx-auto py-16">
+        <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold font-headline">Everything You Need to Succeed</h2>
+            <p className="text-muted-foreground mt-2">All the tools a student could ask for, in one place.</p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+                 <Card key={index}>
+                    <CardHeader className="items-center text-center">
+                        {feature.icon}
+                        <CardTitle className="font-headline">{feature.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <CardDescription className="text-center">{feature.description}</CardDescription>
+                    </CardContent>
+                </Card>
+            ))}
+        </div>
+      </section>
+
+       <footer className="w-full max-w-6xl mx-auto py-8 text-center text-muted-foreground">
+        © {new Date().getFullYear()} Prashant Pandey. All rights reserved.
+      </footer>
+    </main>
   );
 }
