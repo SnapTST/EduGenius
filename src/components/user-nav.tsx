@@ -1,7 +1,6 @@
 
 'use client';
 
-import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,29 +12,38 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { LogOut, User } from 'lucide-react';
+import { LogOut, User, Moon, Sun } from 'lucide-react';
+import { useAuth } from '@/context/auth-context';
+import { useTheme } from 'next-themes';
 
 export function UserNav() {
+  const { user, signOut } = useAuth();
+  const { setTheme, theme } = useTheme();
+
+  if (!user) {
+    return null;
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-10 w-full justify-start gap-2 px-2">
           <Avatar className="h-8 w-8">
-            <AvatarImage src="https://placehold.co/40x40" alt="@prashant" data-ai-hint="person user" />
-            <AvatarFallback>P</AvatarFallback>
+            <AvatarImage src={user.photoURL || ''} alt={user.displayName || ''} data-ai-hint="person user" />
+            <AvatarFallback>{user.displayName?.charAt(0)}</AvatarFallback>
           </Avatar>
-          <div className="text-left">
-            <p className="text-sm font-medium">Prashant</p>
-            <p className="text-xs text-muted-foreground">officialprashant.org@gmail.com</p>
+          <div className="text-left truncate">
+            <p className="text-sm font-medium truncate">{user.displayName}</p>
+            <p className="text-xs text-muted-foreground truncate">{user.email}</p>
           </div>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">Prashant</p>
+            <p className="text-sm font-medium leading-none">{user.displayName}</p>
             <p className="text-xs leading-none text-muted-foreground">
-              officialprashant.org@gmail.com
+              {user.email}
             </p>
           </div>
         </DropdownMenuLabel>
@@ -45,13 +53,15 @@ export function UserNav() {
             <User className="mr-2 h-4 w-4" />
             <span>Profile</span>
           </DropdownMenuItem>
+           <DropdownMenuItem onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+            {theme === 'dark' ? <Sun className="mr-2 h-4 w-4" /> : <Moon className="mr-2 h-4 w-4" />}
+            <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href="/">
-            <LogOut className="mr-2 h-4 w-4" />
-            <span>Log out</span>
-          </Link>
+        <DropdownMenuItem onClick={signOut}>
+          <LogOut className="mr-2 h-4 w-4" />
+          <span>Log out</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

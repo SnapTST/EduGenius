@@ -3,6 +3,7 @@ import './globals.css';
 import { cn } from '@/lib/utils';
 import { Toaster } from "@/components/ui/toaster";
 import Script from 'next/script';
+import { ThemeProvider } from '@/components/theme-provider';
 import ProgressBar from '@/components/progress-bar';
 
 export const metadata: Metadata = {
@@ -32,9 +33,16 @@ export default function RootLayout({
         />
       </head>
       <body className={cn('font-body antialiased min-h-screen')}>
-        <ProgressBar />
-        {children}
-        <Toaster />
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+        >
+            <ProgressBar />
+            {children}
+            <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );
