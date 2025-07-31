@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { SidebarProvider, Sidebar, SidebarTrigger, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarHeader, SidebarFooter, SidebarRail } from '@/components/ui/sidebar';
 import { Logo } from '@/components/logo';
 import { UserNav } from '@/components/user-nav';
-import { LayoutDashboard, FileText, BookOpen, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, Users, Swords, Video, ListOrdered } from 'lucide-react';
+import { LayoutDashboard, FileText, BookOpen, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, Users, Swords, Video, ListOrdered, PenSquare } from 'lucide-react';
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
@@ -20,6 +20,7 @@ const navItems = [
   { href: '/homework-helper', icon: ListOrdered, label: 'Homework Helper' },
   { href: '/chapter-scanner', icon: ScanLine, label: 'Chapter Scanner' },
   { href: '/test-generator', icon: FileText, label: 'AI Test Generator' },
+  { href: '/essay-writer', icon: PenSquare, label: 'Essay Writer' },
   { href: '/interactive-notes', icon: BookOpen, label: 'Interactive Notes' },
   { href: '/flashcard-creator', icon: Layers, label: 'Flashcard Creator' },
   { href: '/video-library', icon: Video, label: 'Video Library' },

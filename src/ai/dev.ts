@@ -10,3 +10,4 @@ import '@/ai/flows/ai-tutor.ts';
 import '@/ai/flows/doubt-solver.ts';
 import '@/ai/flows/generate-quiz.ts';
 import '@/ai/flows/homework-helper.ts';
+import '@/ai/flows/essay-writer.ts';

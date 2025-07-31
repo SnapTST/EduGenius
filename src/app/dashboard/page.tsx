@@ -5,7 +5,7 @@ import { PageHeader } from '@/components/page-header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, Users, Swords, Video, ListOrdered } from 'lucide-react';
+import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, Users, Swords, Video, ListOrdered, PenSquare } from 'lucide-react';
 import Image from 'next/image';
 
 const features = [
@@ -72,6 +72,14 @@ const features = [
     href: '/test-generator',
     image: 'https://placehold.co/600x400',
     aiHint: 'education classroom',
+  },
+  {
+    icon: PenSquare,
+    title: 'Essay Writer',
+    description: 'Generate essays and stories for your assignments.',
+    href: '/essay-writer',
+    image: 'https://placehold.co/600x400',
+    aiHint: 'person writing essay',
   },
   {
     icon: BookOpen,
