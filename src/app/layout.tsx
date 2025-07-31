@@ -33,18 +33,18 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
       </head>
-        <body className={cn('font-body antialiased min-h-screen')}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <ProgressBar />
-            {children}
-            <Toaster />
-          </ThemeProvider>
-        </body>
+      <body className={cn('font-body antialiased min-h-screen')}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ProgressBar />
+          {children}
+          <Toaster />
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
