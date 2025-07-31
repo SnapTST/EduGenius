@@ -119,16 +119,24 @@ export default function InteractiveNotesPage() {
   const handleNextCard = () => {
     if (flashcards) {
       setIsFlipped(false);
-      setCurrentCard((prev) => (prev + 1) % flashcards.length);
+      setTimeout(() => {
+        setCurrentCard((prev) => (prev + 1) % flashcards.length);
+      }, 150);
     }
   };
 
   const handlePrevCard = () => {
     if (flashcards) {
       setIsFlipped(false);
-      setCurrentCard((prev) => (prev - 1 + flashcards.length) % flashcards.length);
+      setTimeout(() => {
+        setCurrentCard((prev) => (prev - 1 + flashcards.length) % flashcards.length);
+      }, 150);
     }
   };
+
+  const flipCard = () => {
+    setIsFlipped(f => !f);
+  }
 
   return (
     <AppLayout>
@@ -223,7 +231,7 @@ export default function InteractiveNotesPage() {
                         <p>Your generated summary will appear here.</p>
                     </div>
                     )}
-                    {summary && <div className="prose prose-sm max-w-none font-body" dangerouslySetInnerHTML={{ __html: summary.replace(/\n/g, '<br />') }} />}
+                    {summary && <div className="prose prose-sm max-w-none font-body" dangerouslySetInnerHTML={{ __html: summary.replace(/\\n/g, '<br />') }} />}
                 </CardContent>
             </Card>
 
@@ -246,49 +254,64 @@ export default function InteractiveNotesPage() {
                         )}
                         {flashcards && flashcards.length > 0 && (
                             <div className="w-full">
-                            <div 
-                                className="relative h-64 w-full cursor-pointer"
-                                style={{ perspective: 1000 }}
-                                onClick={() => setIsFlipped(!isFlipped)}
-                            >
-                                <AnimatePresence initial={false}>
-                                <motion.div
-                                    key={currentCard}
-                                    className={cn(
-                                    "absolute w-full h-full rounded-lg shadow-lg flex items-center justify-center p-6 text-center text-lg font-semibold",
-                                    isFlipped ? 'bg-secondary' : 'bg-primary text-primary-foreground',
-                                    )}
-                                    style={{ transformStyle: 'preserve-3d', backfaceVisibility: 'hidden', rotateY: isFlipped ? 180 : 0}}
+                                <div 
+                                    className="relative h-64 w-full cursor-pointer"
+                                    style={{ perspective: 1000 }}
+                                    onClick={flipCard}
                                 >
-                                    <div style={{ transform: 'rotateY(180deg)', backfaceVisibility: 'hidden', display: !isFlipped ? 'none' : 'block' }}>
-                                        <h3 className="text-sm font-bold uppercase text-muted-foreground mb-2">Answer</h3>
-                                        {flashcards[currentCard].answer}
-                                    </div>
-                                    <div style={{ backfaceVisibility: 'hidden', display: isFlipped ? 'none' : 'block' }}>
-                                        <h3 className="text-sm font-bold uppercase text-primary-foreground/70 mb-2">Question</h3>
-                                        {flashcards[currentCard].question}
-                                    </div>
-                                </motion.div>
-                                </AnimatePresence>
-                            </div>
-
-                            <div className="flex items-center justify-between mt-4">
-                                <Button variant="outline" size="icon" onClick={handlePrevCard}>
-                                <ArrowLeft />
-                                </Button>
-                                <div className="text-sm font-medium text-muted-foreground">
-                                {currentCard + 1} / {flashcards.length}
+                                    <AnimatePresence initial={false}>
+                                        <motion.div
+                                            key={currentCard}
+                                            className="absolute w-full h-full"
+                                            initial={{ opacity: 0, x: 50, scale: 0.9 }}
+                                            animate={{ opacity: 1, x: 0, scale: 1 }}
+                                            exit={{ opacity: 0, x: -50, scale: 0.9 }}
+                                            transition={{ duration: 0.2 }}
+                                            style={{ transformStyle: "preserve-3d" }}
+                                        >
+                                            <motion.div
+                                                className="absolute w-full h-full rounded-lg shadow-lg flex items-center justify-center p-6 text-center text-lg font-semibold bg-primary text-primary-foreground"
+                                                style={{ backfaceVisibility: "hidden" }}
+                                                animate={{ rotateY: isFlipped ? -180 : 0 }}
+                                                transition={{ duration: 0.4 }}
+                                            >
+                                                <div>
+                                                    <h3 className="text-sm font-bold uppercase text-primary-foreground/70 mb-2">Question</h3>
+                                                    {flashcards[currentCard].question}
+                                                </div>
+                                            </motion.div>
+                                            <motion.div
+                                                className="absolute w-full h-full rounded-lg shadow-lg flex items-center justify-center p-6 text-center text-lg font-semibold bg-secondary"
+                                                style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+                                                animate={{ rotateY: isFlipped ? 0 : 180 }}
+                                                transition={{ duration: 0.4 }}
+                                            >
+                                                <div>
+                                                    <h3 className="text-sm font-bold uppercase text-muted-foreground mb-2">Answer</h3>
+                                                    {flashcards[currentCard].answer}
+                                                </div>
+                                            </motion.div>
+                                        </motion.div>
+                                    </AnimatePresence>
                                 </div>
-                                <Button variant="outline" size="icon" onClick={handleNextCard}>
-                                <ArrowRight />
-                                </Button>
-                            </div>
-                            <div className="text-center mt-2">
-                                <Button variant="ghost" size="sm" onClick={() => setIsFlipped(!isFlipped)}>
-                                    <RotateCw className="mr-2 h-4 w-4"/>
-                                    Flip Card
-                                </Button>
-                            </div>
+
+                                <div className="flex items-center justify-between mt-4">
+                                    <Button variant="outline" size="icon" onClick={handlePrevCard}>
+                                    <ArrowLeft />
+                                    </Button>
+                                    <div className="text-sm font-medium text-muted-foreground">
+                                    {currentCard + 1} / {flashcards.length}
+                                    </div>
+                                    <Button variant="outline" size="icon" onClick={handleNextCard}>
+                                    <ArrowRight />
+                                    </Button>
+                                </div>
+                                <div className="text-center mt-2">
+                                    <Button variant="ghost" size="sm" onClick={flipCard}>
+                                        <RotateCw className="mr-2 h-4 w-4"/>
+                                        Flip Card
+                                    </Button>
+                                </div>
                             </div>
                         )}
                     </CardContent>
@@ -299,5 +322,3 @@ export default function InteractiveNotesPage() {
     </AppLayout>
   );
 }
-
-    
