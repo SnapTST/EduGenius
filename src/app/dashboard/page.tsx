@@ -5,7 +5,7 @@ import { PageHeader } from '@/components/page-header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, Users, Swords, Video, ListOrdered, PenSquare, Newspaper } from 'lucide-react';
+import { FileText, BookOpen, ArrowRight, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, ListOrdered, PenSquare } from 'lucide-react';
 import Image from 'next/image';
 
 const features = [
@@ -32,14 +32,6 @@ const features = [
     href: '/daily-practice',
     image: 'https://placehold.co/600x400',
     aiHint: 'quiz test',
-  },
-   {
-    icon: Swords,
-    title: 'MCQ Battle',
-    description: 'Challenge friends in real-time quiz matches.',
-    href: '/mcq-battle',
-    image: 'https://placehold.co/600x400',
-    aiHint: 'two swords clashing',
   },
   {
     icon: BrainCircuit,
@@ -96,30 +88,6 @@ const features = [
     href: '/flashcard-creator',
     image: 'https://placehold.co/600x400',
     aiHint: 'stack of cards',
-  },
-   {
-    icon: Video,
-    title: 'Video Library',
-    description: 'Watch curated educational videos by topic.',
-    href: '/video-library',
-    image: 'https://placehold.co/600x400',
-    aiHint: 'video play button',
-  },
-   {
-    icon: Users,
-    title: 'Community Forum',
-    description: 'Ask questions and learn from the community.',
-    href: '/community-forum',
-    image: 'https://placehold.co/600x400',
-    aiHint: 'people talking forum',
-  },
-  {
-    icon: Newspaper,
-    title: 'News & Updates',
-    description: 'Latest educational news, exams, and scholarships.',
-    href: '/news-and-updates',
-    image: 'https://placehold.co/600x400',
-    aiHint: 'newspaper article',
   },
 ];
 

@@ -8,14 +8,13 @@ import Link from 'next/link';
 import { SidebarProvider, Sidebar, SidebarTrigger, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarHeader, SidebarFooter, SidebarRail } from '@/components/ui/sidebar';
 import { Logo } from '@/components/logo';
 import { UserNav } from '@/components/user-nav';
-import { LayoutDashboard, FileText, BookOpen, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, Users, Swords, Video, ListOrdered, PenSquare, Newspaper } from 'lucide-react';
+import { LayoutDashboard, FileText, BookOpen, Layers, ScanLine, BrainCircuit, Bot, HelpCircle, Target, ListOrdered, PenSquare } from 'lucide-react';
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
   { href: '/ai-tutor', icon: Bot, label: 'AI Tutor' },
   { href: '/doubt-solver', icon: HelpCircle, label: 'Doubt Solver' },
   { href: '/daily-practice', icon: Target, label: 'Daily Practice' },
-  { href: '/mcq-battle', icon: Swords, label: 'MCQ Battle' },
   { href: '/project-assistant', icon: BrainCircuit, label: 'Project Assistant' },
   { href: '/homework-helper', icon: ListOrdered, label: 'Homework Helper' },
   { href: '/chapter-scanner', icon: ScanLine, label: 'Chapter Scanner' },
@@ -23,9 +22,6 @@ const navItems = [
   { href: '/essay-writer', icon: PenSquare, label: 'Essay Writer' },
   { href: '/interactive-notes', icon: BookOpen, label: 'Interactive Notes' },
   { href: '/flashcard-creator', icon: Layers, label: 'Flashcard Creator' },
-  { href: '/video-library', icon: Video, label: 'Video Library' },
-  { href: '/community-forum', icon: Users, label: 'Community Forum'},
-  { href: '/news-and-updates', icon: Newspaper, label: 'News & Updates'},
 ];
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
